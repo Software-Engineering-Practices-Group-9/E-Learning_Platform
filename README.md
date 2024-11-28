@@ -1,2 +1,1 @@
 # LearnSync
-Final project
