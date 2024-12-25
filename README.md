@@ -1,1 +1,1 @@
-# LearnSync
+# E-Learning Platform
