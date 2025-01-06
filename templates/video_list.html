@@ -1,0 +1,48 @@
+<!doctype html>
+<title>Video List</title>
+
+<head>
+    <link rel="stylesheet" href="static/css/video_list.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <!-- Tabs -->
+    <div class="tabs">
+        <ul>
+            <li class="active" id="video-tab">Video</li>
+            <li id="discussion-tab">Discussion</li>
+            <li id="quiz-tab">Quiz</li>
+        </ul>
+    </div>
+
+    <!-- Tab Contents -->
+    <div class="tab-content" id="video-content" style="display: block;">
+        <ul>
+            {% for video in videos %}
+            <li>
+                <a href="{{ url_for('stream_video', filename=video.filename) }}">
+                    <img src="{{ url_for('thumbnail_file', filename=video.thumbnail) }}" alt="Thumbnail">
+                    <!-- Overlay with play icon -->
+                    <div class="overlay">
+                        <i class="fas fa-play play-icon"></i>
+                    </div>
+                </a>
+                <h2>{{ video.filename }}</h2>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="tab-content" id="discussion-content" style="display: none;">
+        <h1>Discussion</h1>
+        <p>Discussion content is temporarily not available.</p>
+    </div>
+
+    <div class="tab-content" id="quiz-content" style="display: none;">
+        <h1>Quiz</h1>
+        <p>Quiz content is temporarily not available.</p>
+    </div>
+
+    <script src="static/js/tab.js"></script>
+</body>

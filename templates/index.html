@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload a Video</title>
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+
+<body>
+    <header>
+        <h1>Navigation</h1>
+        <button onclick="location.href='/videos'">Browse Videos</button>
+    </header>
+    <main>
+        <h2>Upload a Video</h2>
+        <form method="post" action="/upload" enctype="multipart/form-data">
+            <input type="file" name="file" accept="video/*">
+            <input type="submit" value="Upload">
+        </form>
+    </main>
+</body>
+
+</html>
