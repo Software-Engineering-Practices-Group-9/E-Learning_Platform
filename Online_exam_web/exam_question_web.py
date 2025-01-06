@@ -1,6 +1,7 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 import json
 from Online_exam_web.exam_answer_check import answer_check_handler
+from Online_exam_web.utils import save_user_history
 exam_question_web_bp = Blueprint('exam_question_web', __name__, template_folder='templates')
 
 # 定義 JSON 檔案路徑
@@ -26,7 +27,7 @@ def index():
 def submit_exam():
     chapter = request.form.get('chapter')
     questions = load_questions(chapter)
-
+    user_id = session.get('user_id')
     # 收集用戶提交的答案與判斷結果
     user_answers = {}
     status_check = {}  # 改為字典，針對每題存放結果
@@ -41,9 +42,9 @@ def submit_exam():
         parts = answer.split("_")
         question_num = question["num"]
         user_answers[question["num"]] = parts[1]
-        print(question_num)
         status_check[question["num"]] = answer_check_handler(chapter, answer,question_num)
-        
+    save_user_history(user_id, chapter, user_answers, status_check)
+    flash("測驗已完成並儲存紀錄！")   
     # 顯示使用者提交的答案（可擴展成計算成績）
     return render_template('exam_result.html', 
                         user_answers=user_answers, 
