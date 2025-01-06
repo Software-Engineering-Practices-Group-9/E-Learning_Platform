@@ -49,14 +49,224 @@
         "user_id": "D1234567",
         "chapter": "chap2",
         "user_answers": {
-            "0": "3",
-            "1": "4",
+            "0": "2",
+            "1": "3",
             "2": "4"
         },
         "status_check": {
-            "0": "題目索引超出範圍",
-            "1": "題目索引超出範圍",
-            "2": "題目索引超出範圍"
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 4,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 5,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 6,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 7,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 8,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 9,
+        "user_id": "D1234567",
+        "chapter": "chap1",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "Correct",
+            "1": "Correct",
+            "2": "Correct"
+        }
+    },
+    {
+        "record_index": 10,
+        "user_id": "D1234567",
+        "chapter": "chap1",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "Correct",
+            "1": "Correct",
+            "2": "Correct"
+        }
+    },
+    {
+        "record_index": 11,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 12,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 13,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 14,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 15,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "題目索引超出範圍: 0",
+            "1": "題目索引超出範圍: 1",
+            "2": "題目索引超出範圍: 2"
+        }
+    },
+    {
+        "record_index": 16,
+        "user_id": "D1234567",
+        "chapter": "chap2",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "Wrong",
+            "1": "Wrong",
+            "2": "Correct"
+        }
+    },
+    {
+        "record_index": 17,
+        "user_id": "D1234567",
+        "chapter": "chap3",
+        "user_answers": {
+            "0": "2",
+            "1": "3",
+            "2": "4"
+        },
+        "status_check": {
+            "0": "Correct",
+            "1": "Correct",
+            "2": "Correct"
         }
     }
 ]

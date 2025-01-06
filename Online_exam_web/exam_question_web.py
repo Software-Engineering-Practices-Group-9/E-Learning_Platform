@@ -41,26 +41,37 @@ def submit_exam():
     chapter = request.form.get('chapter')
     questions = load_questions(chapter)
     user_id = session.get('user_id')
+    
     # 收集用戶提交的答案與判斷結果
     user_answers = {}
     status_check = {}  # 改為字典，針對每題存放結果
 
-    for index, question in enumerate(questions, start=1):
-        answer = request.form.get(f"answer_{index}")
+    for index, question in enumerate(questions):
+        answer = request.form.get(f"answer_{index + 1}")
         if not answer:
             flash(f"請完成題目 {question['question']} 後再提交！")
             return redirect(url_for('exam_question_web.index', chapter=chapter))
         
-        # 儲存每一題的狀態檢查
+        # 直接使用 enumerate 傳回的 index 作為題號
+        question_num = index  
         parts = answer.split("_")
-        question_num = question["num"]
-        user_answers[question["num"]] = parts[1]
-        status_check[question["num"]] = answer_check_handler(chapter, answer,question_num)
+        user_answers[question_num] = parts[1]
+        
+        # 確保索引範圍正確
+        if question_num < len(questions):
+            
+            status_check[question_num] = answer_check_handler(chapter, answer, question_num)
+        else:
+            flash(f"題目索引超出範圍: {question_num}")
+            return redirect(url_for('exam_question_web.index', chapter=chapter))
+
+    # 儲存測驗記錄
     save_user_history(user_id, chapter, user_answers, status_check)
     flash("測驗已完成並儲存紀錄！")   
-    # 顯示使用者提交的答案（可擴展成計算成績）
+    
+    # 顯示使用者提交的答案
     return render_template('exam_result.html', 
-                        user_answers=user_answers, 
-                        questions=questions, 
-                        chapter=chapter, 
-                        status_check=status_check)
+                           user_answers=user_answers, 
+                           questions=questions, 
+                           chapter=chapter, 
+                           status_check=status_check)

@@ -2,6 +2,8 @@ import json
 import os
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 CHAP_1_FILE = "question_bank/chap_1.json"
+CHAP_2_FILE = "question_bank/chap_2.json"
+CHAP_3_FILE = "question_bank/chap_3.json"
 USER_JSON_PATH = os.path.join(BASE_DIR, "../account_management/database/user.json")
 USER_HISTORY_DIR = os.path.join(BASE_DIR, "../account_management/database/user_history")
 QUESTION_BANK_PATH = "question_bank/"
@@ -10,6 +12,18 @@ def load_questions(chapter):
     if chapter == "chap1":
         try:
             with open(CHAP_1_FILE, 'r', encoding='utf-8') as file:
+                return json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+    elif chapter == "chap2":
+        try:
+            with open(CHAP_2_FILE, 'r', encoding='utf-8') as file:
+                return json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+    elif chapter == "chap3":
+        try:
+            with open(CHAP_3_FILE, 'r', encoding='utf-8') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return []
