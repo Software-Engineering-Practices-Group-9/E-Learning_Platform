@@ -18,9 +18,9 @@
                     <strong>您的答案：</strong> {{ history_data['user_answers'][(loop.index-1)|string] }}<br>
                     <strong>答題結果：</strong> 
                     {% if history_data['status_check'][(loop.index-1)|string] == "Correct" %}
-                        <span class="text-success">Correct</span>
+                        <span class="text-success">Correct</span> 
                     {% else %}
-                        <span class="text-danger">Incorrect</span>
+                        <span class="text-danger">Incorrect</span>{{ question['explain']}}
                     {% endif %}
                 </li>
             {% endfor %}

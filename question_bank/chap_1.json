@@ -7,7 +7,8 @@
         "select_2": "2",
         "select_3": "3",
         "select_4": "4",
-        "answer": "select_2"
+        "answer": "select_2",
+        "explain":"  Because 1+1=2"
     },
     {
         "id": "chap1",
@@ -17,7 +18,8 @@
         "select_2": "2",
         "select_3": "3",
         "select_4": "4",
-        "answer": "select_3"
+        "answer": "select_3",
+        "explain":"  Because 1+2=3"
     },
     {
         "id": "chap1",
@@ -27,6 +29,7 @@
         "select_2": "2",
         "select_3": "3",
         "select_4": "4",
-        "answer": "select_4"
+        "answer": "select_4",
+        "explain":"  Because 1+3=4"
     }
 ]
