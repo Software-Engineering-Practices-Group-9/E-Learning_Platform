@@ -6,12 +6,25 @@ exam_question_web_bp = Blueprint('exam_question_web', __name__, template_folder=
 
 # 定義 JSON 檔案路徑
 CHAP_1_FILE = "question_bank/chap_1.json"
-
+CHAP_2_FILE = "question_bank/chap_2.json"
+CHAP_3_FILE = "question_bank/chap_3.json"
 def load_questions(chapter):
     """根據章節載入題目"""
     if chapter == "chap1":
         try:
             with open(CHAP_1_FILE, 'r', encoding='utf-8') as file:
+                return json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+    elif chapter == "chap2":
+        try:
+            with open(CHAP_2_FILE, 'r', encoding='utf-8') as file:
+                return json.load(file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return []
+    elif chapter == "chap3":
+        try:
+            with open(CHAP_3_FILE, 'r', encoding='utf-8') as file:
                 return json.load(file)
         except (FileNotFoundError, json.JSONDecodeError):
             return []
