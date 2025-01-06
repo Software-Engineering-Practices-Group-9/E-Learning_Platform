@@ -15,9 +15,9 @@
             {% for question in questions %}
                 <li class="list-group-item">
                     <strong>題目 {{ loop.index }}:</strong> {{ question['question'] }}<br>
-                    <strong>您的答案：</strong> {{ history_data['user_answers'][loop.index|string] }}<br>
+                    <strong>您的答案：</strong> {{ history_data['user_answers'][(loop.index-1)|string] }}<br>
                     <strong>答題結果：</strong> 
-                    {% if history_data['status_check'][loop.index|string] == "Correct" %}
+                    {% if history_data['status_check'][(loop.index-1)|string] == "Correct" %}
                         <span class="text-success">Correct</span>
                     {% else %}
                         <span class="text-danger">Incorrect</span>
