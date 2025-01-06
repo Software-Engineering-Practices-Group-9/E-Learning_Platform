@@ -103,6 +103,9 @@ def video_file(filename):
 def thumbnail_file(filename):
     return send_from_directory(app.config["THUMBNAIL_FOLDER"], filename)
 
+@app.route("/videos/download/<filename>")
+def download_video(filename):
+    return send_from_directory(app.config["VIDEO_FOLDER"], filename, as_attachment=True)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)

@@ -9,8 +9,13 @@
 </head>
 
 <body>
-    <button class="back-button" onclick="location.href='/videos'">&larr; Back</button>
-    <h1>Streaming {{ filename }}</h1>
+    <div class="header">
+        <button class="back-button" onclick="location.href='/videos'">&larr; Back</button>
+        <h1>Streaming {{ filename }}</h1>
+        <a href="{{ url_for('download_video', filename=filename) }}" class="download-button" download>
+            ⬇ Download
+        </a>
+    </div>
     <video controls autoplay>
         <source src="{{ url_for('video_file', filename=filename) }}" type="{{ mime_type }}">
         Your browser does not support the video tag.

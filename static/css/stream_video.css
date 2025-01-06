@@ -27,6 +27,12 @@ video {
     object-fit: contain;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .back-button {
     position: absolute;
     top: 10px;
@@ -41,5 +47,19 @@ video {
 }
 
 .back-button:hover {
+    background-color: #bbb;
+}
+
+.download-button {
+    font-size: 24px;
+    padding: 10px;
+    background-color: #ccc;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.download-button:hover {
     background-color: #bbb;
 }
