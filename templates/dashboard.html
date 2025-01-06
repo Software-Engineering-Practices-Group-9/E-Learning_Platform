@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>儀表板</title>
+    <!-- 引入 Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between mb-4">
+            <h1>儀表板 - 歡迎，{{ username }}</h1>
+            <a href="{{ url_for('logout') }}" class="btn btn-danger">登出</a>
+        </div>
+        
+        <h3>群組列表</h3>
+        <ul class="list-group">
+            {% for group in groups %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ group['name'] }}
+                    <a href="{{ url_for('join_group', group_name=group['name']) }}" class="btn btn-primary btn-sm">加入</a>
+                </li>
+            {% else %}
+                <li class="list-group-item">目前沒有群組。</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
