@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>測驗頁面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .question-box {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="my-4">測驗題目</h1>
+        <p>您選擇的章節是：<strong>{{ chapter }}</strong></p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+
+        <!-- 提交表單，傳遞所有選擇的答案 -->
+        <form action="{{ url_for('exam_question_web.submit_exam') }}" method="POST">
+            <input type="hidden" name="chapter" value="{{ chapter }}">
+
+            {% for question in questions %}
+            <div class="question-box">
+                <p><strong>題目 {{ loop.index }}:</strong> {{ question.question }}</p>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer_{{ loop.index }}" value="select_1" required>
+                    <label class="form-check-label">{{ question.select_1 }}</label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer_{{ loop.index }}" value="select_2" required>
+                    <label class="form-check-label">{{ question.select_2 }}</label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer_{{ loop.index }}" value="select_3" required>
+                    <label class="form-check-label">{{ question.select_3 }}</label>
+                </div>
+                
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer_{{ loop.index }}" value="select_4" required>
+                    <label class="form-check-label">{{ question.select_4 }}</label>
+                </div>
+            </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-primary mt-3">提交測驗</button>
+        </form>
+
+        <a href="/" class="btn btn-secondary mt-3">返回章節選擇</a>
+    </div>
+</body>
+</html>
