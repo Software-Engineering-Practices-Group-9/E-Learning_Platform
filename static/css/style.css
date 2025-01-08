@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+footer {
+    margin-top: auto;
+}
+
+.navbar {
+    background-color: #000 !important;
+}
+
+.navbar .nav-link {
+    color: #fff !important;
+    font-size: 1rem;
+}
+
+.navbar .nav-link:hover {
+    background-color: #fff !important;
+    color: #000 !important;
+    border-radius: 5px;
+}
+
+.navbar-brand {
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}

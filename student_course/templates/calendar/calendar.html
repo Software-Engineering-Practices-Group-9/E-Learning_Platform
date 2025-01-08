@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullCalendar with Bootstrap 5</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <!-- FullCalendar CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+    
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+    <link rel="stylesheet" href="/static/css/style.css">
+
+    <style>
+        .fc-event {
+            cursor: pointer;
+        }
+        .modal-header {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar 保持不變 -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">E-Learning</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('student_course.student_page') }}">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('login_logout.logout') }}">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-start">
+            <a href="{{ url_for('student_course.student_page') }}" class="btn btn-secondary">返回</a>
+        </div>
+        <h2 class="text-center mb-4">行事曆</h2>
+        <div id="calendar"></div>
+    </div>
+
+    <!-- Event Modal -->
+    <div class="modal fade" id="eventModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Event</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="eventForm">
+                        <div class="mb-3">
+                            <label for="eventTitle" class="form-label">Event Title</label>
+                            <input type="text" class="form-control" id="eventTitle" required>
+                        </div>
+                        <input type="hidden" id="eventId">
+                        <input type="hidden" id="eventStart">
+                        <input type="hidden" id="eventEnd">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="deleteEvent" style="display: none;">Delete</button>
+                    <button type="button" class="btn btn-primary" id="saveEvent">Save Event</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light py-4">
+        <div class="container text-center">
+            <p class="mb-0">
+                group9 2025
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            const modal = new bootstrap.Modal(document.getElementById('eventModal'));
+            let calendar = $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                events: '/calendar/api/events',
+                selectable: true,
+                selectHelper: true,
+                editable: true,
+                
+                select: function(start, end) {
+                    $('#eventTitle').val('');
+                    $('#eventId').val('');
+                    $('#eventStart').val(moment(start).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#eventEnd').val(moment(end).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#deleteEvent').hide();
+                    $('.modal-title').text('Add Event');
+                    modal.show();
+                },
+                
+                eventClick: function(event) {
+                    $('#eventTitle').val(event.title);
+                    $('#eventId').val(event.id);
+                    $('#eventStart').val(moment(event.start).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#eventEnd').val(moment(event.end).format('YYYY-MM-DD HH:mm:ss'));
+                    $('#deleteEvent').show();
+                    $('.modal-title').text('Edit Event');
+                    modal.show();
+                },
+                
+                eventDrop: function(event) {
+                    updateEvent({
+                        id: event.id,
+                        title: event.title,
+                        start: moment(event.start).format('YYYY-MM-DD HH:mm:ss'),
+                        end: moment(event.end).format('YYYY-MM-DD HH:mm:ss')
+                    });
+                },
+                
+                eventResize: function(event) {
+                    updateEvent({
+                        id: event.id,
+                        title: event.title,
+                        start: moment(event.start).format('YYYY-MM-DD HH:mm:ss'),
+                        end: moment(event.end).format('YYYY-MM-DD HH:mm:ss')
+                    });
+                }
+            });
+
+            // 儲存事件
+            $('#saveEvent').click(function() {
+                if (!$('#eventTitle').val()) {
+                    showAlert('Please enter event title', 'warning');
+                    return;
+                }
+
+                const eventData = new FormData();
+                eventData.append('title', $('#eventTitle').val());
+                eventData.append('start', $('#eventStart').val());
+                eventData.append('end', $('#eventEnd').val());
+
+                const eventId = $('#eventId').val();
+                
+                if (eventId) {
+                    eventData.append('id', eventId);
+                    updateEvent(eventData, eventId);
+                } else {
+                    createEvent(eventData);
+                }
+                
+                modal.hide();
+            });
+
+            // 刪除事件
+            $('#deleteEvent').click(function() {
+                if (confirm('Are you sure you want to delete this event?')) {
+                    const eventId = $('#eventId').val();
+                    deleteEvent(eventId);
+                    modal.hide();
+                }
+            });
+
+            // API 函數
+            function createEvent(eventData) {
+                $.ajax({
+                    url: '/calendar/api/events',
+                    method: 'POST',
+                    data: eventData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        calendar.fullCalendar('refetchEvents');
+                        showAlert('Event created successfully!', 'success');
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = 'Error creating event!';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage += ' ' + xhr.responseJSON.error;
+                        }
+                        showAlert(errorMessage, 'danger');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+            function updateEvent(eventData) {
+                $.ajax({
+                    url: '/calendar/api/events/' + eventData.id,  // Ensure event ID is passed correctly
+                    method: 'PUT',
+                    data: JSON.stringify(eventData),  // Send data as JSON
+                    contentType: 'application/json',   // Set content type to JSON
+                    success: function(response) {
+                        calendar.fullCalendar('refetchEvents');
+                        showAlert('Event updated successfully!', 'success');
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = 'Error updating event!';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage += ' ' + xhr.responseJSON.error;
+                        }
+                        showAlert(errorMessage, 'danger');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+
+            function deleteEvent(eventId) {
+                $.ajax({
+                    url: '/calendar/api/events/' + eventId,
+                    method: 'DELETE',
+                    success: function(response) {
+                        calendar.fullCalendar('refetchEvents');
+                        showAlert('Event deleted successfully!', 'success');
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = 'Error deleting event!';
+                        if (xhr.responseJSON && xhr.responseJSON.error) {
+                            errorMessage += ' ' + xhr.responseJSON.error;
+                        }
+                        showAlert(errorMessage, 'danger');
+                        console.error('Error:', error);
+                    }
+                });
+            }
+
+        //     function showAlert(message, type) {
+        //         const alertDiv = $('<div>')
+        //             .addClass(`alert alert-${type} alert-dismissible fade show`)
+        //             .attr('role', 'alert')
+        //             .html(`
+        //                 ${message}
+        //                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        //             `);
+                
+        //         $('.container').prepend(alertDiv);
+                
+        //         setTimeout(() => {
+        //             alertDiv.alert('close');
+        //         }, 3000);
+        //     }
+        });
+    </script>
+</body>
+</html>
